@@ -21,5 +21,10 @@ class BoardsController < ApplicationController
     end
 
     board.save
+    redirect_to "/boards/#{board.key}"
+  end
+
+  def show
+    @board = Board.find_by(key: params["key"])
   end
 end
