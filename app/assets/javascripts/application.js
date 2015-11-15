@@ -13,4 +13,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require_tree .
+//= require react
+//= require react_ujs
+//= require immutable.min.js
+//= require components
