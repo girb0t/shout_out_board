@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20151115103033) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "categories_id"
-    t.text     "body",          null: false
+    t.integer  "category_id"
+    t.text     "body",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
