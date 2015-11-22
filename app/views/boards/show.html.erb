@@ -1,11 +1,9 @@
-<h1>Shout Out Boards Show (key: <%= @board_json %>)<h1>
 
 <div id="board-stage">
 </div>
 <script>
-var board_json = Immutable.fromJS(<%= @board_json.html_safe %>)
   ReactDOM.render(
-    React.createElement(BoardStageWrapper, {boardStageData: board_json}),
+    React.createElement(BoardStage, {boardKey: "<%= @board_key %>"}),
     document.getElementById("board-stage")
   );
 </script>

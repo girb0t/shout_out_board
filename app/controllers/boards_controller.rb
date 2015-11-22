@@ -25,7 +25,18 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board_json = Board.find_by(key: params["key"])
-                       .to_board_stage_json
+    respond_to do |format|
+      format.html {
+        @board_key = params["key"]
+      }
+
+      format.json do
+        render json: Board.find_by(key: params["key"])
+                          .to_board_stage_json
+      end
+
+    end
+
+
   end
 end
