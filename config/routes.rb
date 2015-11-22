@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # boards
   get  '/boards/new',             to: 'boards#new'
-  get  '/boards/:key',            to: 'boards#show'
   post '/boards',                 to: 'boards#create'
   get  '/boards/validate_key',    to: 'boards#validate_key'
+  get  '/boards/:key',            to: 'boards#show'
 end
