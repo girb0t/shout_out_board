@@ -16,4 +16,5 @@
 //= require react
 //= require react_ujs
 //= require immutable.min.js
+//= require global_variables
 //= require components

@@ -1,5 +1,3 @@
-var NewBoardForm = NewBoardForm || {};
-
 (function() {
   "use strict";
 
