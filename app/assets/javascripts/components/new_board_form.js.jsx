@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  NewBoardForm = React.createClass({
+  var NewBoardForm = React.createClass({
     endpoints: {
       validateKey: '/boards/validate_key',
       submitForm:  '/boards',

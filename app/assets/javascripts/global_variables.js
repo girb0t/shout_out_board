@@ -1,2 +1,0 @@
-var NewBoardForm = {};
-var BoardStage = {};

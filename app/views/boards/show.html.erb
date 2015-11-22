@@ -1,9 +1,9 @@
-
-<div id="board-stage">
+<div class="container-fluid">
+  <div id="board-stage"></div>
 </div>
 <script>
   ReactDOM.render(
-    React.createElement(BoardStage, {boardKey: "<%= @board_key %>"}),
+    React.createElement(BoardStage.BoardStage, {boardKey: "<%= @board_key %>"}),
     document.getElementById("board-stage")
   );
 </script>

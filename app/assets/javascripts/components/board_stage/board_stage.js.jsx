@@ -1,7 +1,8 @@
+var BoardStage = BoardStage || {};
+
 (function() {
   "use strict";
-
-  BoardStage = React.createClass({
+  BoardStage.BoardStage= React.createClass({
     propTypes: {
       boardKey: React.PropTypes.string.isRequired,
     },
@@ -20,12 +21,16 @@
     },
 
     render: function() {
+      var categoryNodes = this._categoryNodes();
       return(
-        <div>
-          <h1>title: {this.state.title}</h1>
-          <h1>key: {this.state.boardKey}</h1>
-          <h1>isActive: {this.state.isActive.toString()}</h1>
-          <h1>Category Count: {this.state.categories.size}</h1>
+        <div id="board-stage-wrapper">
+          <div className="text-center"><h1>{this.state.title}</h1></div>
+          <div className="text-center"><h2>{this.state.boardKey}</h2></div>
+          <div id="board-stage">
+            <div className="row">
+              {categoryNodes}
+            </div>
+          </div>
         </div>
       );
     },
@@ -44,6 +49,25 @@
           });
         }
       });
+    },
+
+    _categoryNodes: function() {
+      if(this.state.categories.size){
+        var result;
+        var colSize = 12 / this.state.categories.size;
+        var className = "category-col col-md-" + colSize;
+        result = this.state.categories.map(function(cat, index){
+          return (
+            <div className={className} key={index}>
+              <BoardStage.Category
+                title={cat.get('title')}
+                posts={cat.get('posts')}
+              />
+            </div>
+          );
+        });
+        return result;
+      }
     },
   });
 })();
