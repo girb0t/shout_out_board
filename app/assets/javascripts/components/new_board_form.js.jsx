@@ -1,9 +1,9 @@
-var ShoutOut = ShoutOut || {};
+var NewBoardForm = NewBoardForm || {};
 
 (function() {
   "use strict";
 
-  ShoutOut.NewBoardForm = React.createClass({
+  NewBoardForm = React.createClass({
     endpoints: {
       validateKey: '/boards/validate_key',
       submitForm:  '/boards',
