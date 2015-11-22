@@ -1,11 +1,14 @@
-<h1>New Board</h1>
-<div id="new-board-form">
+<div class="container">
+  <h1>New Board</h1>
+  <div id="new-board-form">
+  </div>
+  <div style='display:none'>
+    <%= form_tag('#', {class: "new-board-form-data", method: "post"}) do %>
+      <%= hidden_field_tag 'form-data-json' %>
+    <% end %>
+  </div>
 </div>
-<div style='display:none'>
-  <%= form_tag('#', {class: "new-board-form-data", method: "post"}) do %>
-    <%= hidden_field_tag 'form-data-json' %>
-  <% end %>
-</div>
+
 <script>
   ReactDOM.render(
     React.createElement(NewBoardForm, {}),
