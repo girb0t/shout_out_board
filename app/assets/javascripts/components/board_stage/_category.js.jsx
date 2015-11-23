@@ -4,7 +4,7 @@ var BoardStage = BoardStage || {};
   "use strict";
   BoardStage.Category = React.createClass({
     propTypes: {
-      className: React.PropTypes.string.isRequired,
+      colSizeClass: React.PropTypes.string.isRequired,
       title: React.PropTypes.string.isRequired,
       posts: React.PropTypes.instanceOf(Immutable.List).isRequired,
     },
@@ -18,9 +18,9 @@ var BoardStage = BoardStage || {};
 
     render: function() {
       var postNodes = this._postNodes();
+      var className = "category-col " + this.props.colSizeClass;
       return(
-        <div className={this.props.className} key={this.props.key}>
-          <h2 className="text-center">{this.props.title}</h2>
+        <div className={className} key={this.props.key}>
           {postNodes}
         </div>
       );

@@ -1,9 +1,21 @@
 #board-stage {
   #board-stage {
+    .category-header {
+      border-top: 4px solid black;
+      border-left: 4px solid black;
+      &:last-child {
+        border-right: 4px solid black;
+      }
+    }
+
     .category-col {
-      border: 4px solid black;
-      height: 700px;
+      border-left: 4px solid black;
+      border-bottom: 4px solid black;
+      height: 600px;
       overflow-y: scroll;
+      &:last-child {
+        border-right: 4px solid black;
+      }
     }
 
     .post {
