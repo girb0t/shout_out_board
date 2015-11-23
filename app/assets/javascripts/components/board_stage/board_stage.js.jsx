@@ -67,7 +67,7 @@ var BoardStage = BoardStage || {};
         result = this.state.categories.map(function(cat, index){
           return (
             <div className={className} key={index}>
-              <h2 className="text-center">{cat.get('title')}</h2>
+              <p className="text-center">{cat.get('title')}</p>
             </div>
           );
         });
@@ -94,7 +94,12 @@ var BoardStage = BoardStage || {};
     },
 
     _categoryColSizeClass: function() {
-      return "col-md-" + (12 / this.state.categories.size);
+      var colSize = 12 / this.state.categories.size;
+      var className = "col-xs-" + colSize;
+          className += " col-sm-" + colSize;
+          className += " col-md-" + colSize;
+          className += " col-lg-" + colSize;
+      return className;
     },
 
     _adjustDimensions: function() {
