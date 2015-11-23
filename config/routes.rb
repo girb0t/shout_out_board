@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   post '/boards',                 to: 'boards#create'
   get  '/boards/validate_key',    to: 'boards#validate_key'
   get  '/boards/:key',            to: 'boards#show'
+
+  # posts
+  get '/posts/new',               to: 'posts#new'
+  get '/posts/validate_key',      to: 'posts#validate_key'
 end

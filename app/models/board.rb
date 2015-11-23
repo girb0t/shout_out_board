@@ -8,6 +8,10 @@ class Board < ActiveRecord::Base
     return self.where(key: key).empty?
   end
 
+  def self.is_active_key?(key)
+    return self.where(key: key, active: true).present?
+  end
+
   def to_board_stage_json
     self.to_json(:only => [:key, :title, :active],
                  :include => { :categories => {:only => [:title],
