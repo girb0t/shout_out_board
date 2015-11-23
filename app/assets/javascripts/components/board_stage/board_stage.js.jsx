@@ -58,12 +58,12 @@ var BoardStage = BoardStage || {};
         var className = "category-col col-md-" + colSize;
         result = this.state.categories.map(function(cat, index){
           return (
-            <div className={className} key={index}>
-              <BoardStage.Category
-                title={cat.get('title')}
-                posts={cat.get('posts')}
-              />
-            </div>
+            <BoardStage.Category
+              key={index}
+              className={className}
+              title={cat.get('title')}
+              posts={cat.get('posts')}
+            />
           );
         });
         return result;
