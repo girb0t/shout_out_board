@@ -16,11 +16,25 @@ var BoardStage = BoardStage || {};
     },
 
     render: function() {
+      var postNodes = this._postNodes();
       return(
         <div>
           <h2 className="text-center">{this.props.title}</h2>
+          {postNodes}
         </div>
       );
-    }
+    },
+
+    _postNodes: function() {
+      var result = this.props.posts.map(function(post, index) {
+        return(
+          <BoardStage.Post
+            key={index}
+            body={post.get('body')}
+          />
+        );
+      });
+      return result;
+    },
   });
 })();
