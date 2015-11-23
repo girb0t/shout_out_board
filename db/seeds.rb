@@ -8,18 +8,26 @@ def lorem(len=nil)
   lorem[rand(0..20), rand(10..275)].lstrip
 end
 
-board = Board.create(key: 'sparrow', title: 'Oct. 16 Session')
-categories = [ { title:"Something new I learned...", prompt: "Something I'm *grateful* for in the club is...", post_count: 2},
-                         { title:"Something I strugged with...", prompt: "Something I struggled with today is...", post_count: 40},
-                         { title:"Something awesome I saw someone else doing...", prompt: "Something awesome I saw someone else doing is...", post_count: 12 } ]
+def create_board(key, title, category_count)
+  board = Board.create(key: key, title: title)
+  categories = [ { title:"Something new I learned...", prompt: "Something I'm *grateful* for in the club is...", post_count: 40},
+                 { title:"Something I strugged with...", prompt: "Something I struggled with today is...", post_count: 12},
+                 { title:"Something awesome I saw someone else doing...", prompt: "Something awesome I saw someone else doing is...", post_count: 2 } ]
 
-categories.each do |c|
-  category = Category.create({ board_id: board.id,
-                                       title: c[:title],
-                                       prompt: c[:prompt] })
+  categories[0, category_count].each do |c|
+    category = Category.create({ board_id: board.id,
+                                 title: c[:title],
+                                 prompt: c[:prompt] })
 
-  c[:post_count].times do
-    Post.create({ category_id: category.id,
-                          body: lorem })
+    c[:post_count].times do
+      Post.create({ category_id: category.id,
+                    body: lorem })
+    end
   end
 end
+
+
+
+create_board('sparrow', 'Friday, Oct. 16', 1)
+create_board('pigeon', 'Friday, Oct. 23', 2)
+create_board('eagle', 'Friday, Nov. 20', 3)
