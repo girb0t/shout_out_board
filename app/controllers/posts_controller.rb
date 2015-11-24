@@ -4,7 +4,14 @@ class PostsController < ApplicationController
 
   def validate_key
     key = params[:key]
-    is_active = Board.is_active_key?(key)
-    render json: {isActive: is_active, key: key}
+    board = Board.where(key: key, active: true).first
+
+    if board
+      result = {isActive: true, key: key, categories: board.categories.select('id,prompt')}
+    else
+      result = {isActive: false, key: key}
+    end
+
+    render json: result
   end
 end

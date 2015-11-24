@@ -6,7 +6,8 @@ var NewPostForm = NewPostForm || {};
 
     getInitialState: function() {
       return {
-        key: Immutable.Map({isActive: false, value: "", validationMessage: ""})
+        key: Immutable.Map({isActive: false, value: "", validationMessage: ""}),
+        categories: Immutable.List(),
       };
     },
 
@@ -28,6 +29,14 @@ var NewPostForm = NewPostForm || {};
               <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
             </div>
           </div>
+
+          <div id="post-form-container" className="col-md-8 col-md-offset-2">
+            <ul className="nav nav-tabs">
+              <li role="presentation" className="active"><a href="#">Home</a></li>
+              <li role="presentation"><a href="#">Profile</a></li>
+              <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+          </div>
         </div>
       );
     },
@@ -44,13 +53,20 @@ var NewPostForm = NewPostForm || {};
           data: {key: key},
           success: function(response) {
             var validationMessage = response.isActive ? goodKeyMessage : badKeyMessage;
-            that.setState({
+            var newState = ({
               key: Immutable.Map({
-                value: response.key,
-                isActive: response.isActive,
-                validationMessage: validationMessage,
-              })
+                     value: response.key,
+                     isActive: response.isActive,
+                     validationMessage: validationMessage,
+                   }),
+              categories: that.getInitialState().categories,
             });
+
+            if(response.categories) {
+              newState.categories = Immutable.fromJS(response.categories);
+            }
+
+            that.setState(newState);
           },
           error: function(response) {
             //handle error
