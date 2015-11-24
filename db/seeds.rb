@@ -10,12 +10,13 @@ end
 
 def create_board(key, title, category_count)
   board = Board.create(key: key, title: title)
-  categories = [ { title:"Something new I learned...", prompt: "Something I'm *grateful* for in the club is...", post_count: 40},
-                 { title:"Something I strugged with...", prompt: "Something I struggled with today is...", post_count: 12},
-                 { title:"Something awesome I saw someone else doing...", prompt: "Something awesome I saw someone else doing is...", post_count: 2 } ]
+  categories = [ { tab_name: "New",title:"Something new I learned...", prompt: "Something I'm *grateful* for in the club is...", post_count: 40},
+                 { tab_name: "Struggle",title:"Something I strugged with...", prompt: "Something I struggled with today is...", post_count: 12},
+                 { tab_name: "Awesome",title:"Something awesome I saw someone else doing...", prompt: "Something awesome I saw someone else doing is...", post_count: 2 } ]
 
   categories[0, category_count].each do |c|
     category = Category.create({ board_id: board.id,
+                                 tab_name: c[:tab_name],
                                  title: c[:title],
                                  prompt: c[:prompt] })
 
