@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def validate_key
     key = params[:key]
-    is_valid = Board.is_active_key?(key)
-    render json: {isValid: is_valid, key: key}
+    is_active = Board.is_active_key?(key)
+    render json: {isActive: is_active, key: key}
   end
 end
