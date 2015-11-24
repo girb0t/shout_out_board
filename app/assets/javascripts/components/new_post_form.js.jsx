@@ -8,15 +8,22 @@ var NewPostForm = NewPostForm || {};
       return {
         key: Immutable.Map({isActive: false, value: "", validationMessage: ""}),
         categories: Immutable.List(),
+        activeTab: 0,
       };
     },
 
     componentDidMount: function() {
-      $('#key-input-container input').focus();
+      this._focusKeyInput();
+    },
+
+    componentDidUpdate: function() {
+      this._initNavTabEventListeners();
     },
 
     render: function() {
       var keyValidationMessageClass = this.state.key.get('isActive') ? "text-success" : "text-danger";
+      var tabNodes = this._tabNodes();
+      var tabContentNodes = this._tabContentNodes();
       return (
         <div>
           <div id="key-input-container" className="col-md-4 col-md-offset-4">
@@ -31,14 +38,44 @@ var NewPostForm = NewPostForm || {};
           </div>
 
           <div id="post-form-container" className="col-md-8 col-md-offset-2">
-            <ul className="nav nav-tabs">
-              <li role="presentation" className="active"><a href="#">Home</a></li>
-              <li role="presentation"><a href="#">Profile</a></li>
-              <li role="presentation"><a href="#">Messages</a></li>
+            <ul className="nav nav-tabs" role="tablist">
+              {tabNodes}
             </ul>
+
+            <div className="tab-content">
+              {tabContentNodes}
+            </div>
           </div>
         </div>
       );
+    },
+
+    _tabNodes: function() {
+      var that = this;
+      var result = this.state.categories.map(function(category, index) {
+        var className = that.state.activeTab === index ? "active" : "";
+        var href = "#category-" + index;
+        return(
+          <li key={index} role="presentation" className={className}>
+            <a href={href} role="tab" data-toggle="tab">Category {index}</a>
+          </li>
+        );
+      });
+      return result;
+    },
+
+    _tabContentNodes: function() {
+      var that = this;
+      var result = this.state.categories.map(function(category, index) {
+        var className = that.state.activeTab === index ? "tab-pane active" : "tab-pane";
+        var id = "category-" + index;
+        return(
+          <div role="tabpanel" className={className} id={id} key={index}>
+            <h2>{category.get('prompt')}</h2>
+          </div>
+        );
+      });
+      return result;
     },
 
     _onKeyChange: function(event) {
@@ -81,6 +118,18 @@ var NewPostForm = NewPostForm || {};
           })
         });
       }
+    },
+
+    _focusKeyInput: function() {
+      $('#key-input-container input').focus();
+    },
+
+    _initNavTabEventListeners: function() {
+      var that = this;
+      $('#post-form-container .nav-tabs a').click(function(e) {
+        e.preventDefault();
+        $(this).tab('show');
+      });
     },
   });
 })();
