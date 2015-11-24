@@ -57,7 +57,7 @@ var NewPostForm = NewPostForm || {};
         var href = "#category-" + index;
         return(
           <li key={index} role="presentation" className={className}>
-            <a href={href} role="tab" data-toggle="tab">Category {index}</a>
+            <a href={href} role="tab" data-toggle="tab">{category.get('tab_name')}</a>
           </li>
         );
       });

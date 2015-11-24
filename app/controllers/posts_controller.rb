@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     board = Board.where(key: key, active: true).first
 
     if board
-      result = {isActive: true, key: key, categories: board.categories.select('id,prompt')}
+      result = {isActive: true, key: key, categories: board.categories.select('id,prompt,tab_name')}
     else
       result = {isActive: false, key: key}
     end
