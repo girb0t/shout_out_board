@@ -69,9 +69,14 @@ var NewPostForm = NewPostForm || {};
       var result = this.state.categories.map(function(category, index) {
         var className = that.state.activeTab === index ? "tab-pane active" : "tab-pane";
         var id = "category-" + index;
+        var inputId = id + "-input";
+        var inputVal = category.get('post');
         return(
           <div role="tabpanel" className={className} id={id} key={index}>
-            <h2>{category.get('prompt')}</h2>
+            <h3>{category.get('prompt')}</h3>
+            <label htmlFor={inputId}>{category.get('prompt')}</label>
+            <textarea className="form-control" id={inputId} name={inputId} value={inputVal} onChange={that._onPostChange.bind(that, index)} />
+            <button className="btn btn-primary" type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
           </div>
         );
       });
@@ -118,6 +123,25 @@ var NewPostForm = NewPostForm || {};
           })
         });
       }
+    },
+
+    _onSubmit: function(index, event) {
+      var categoryId = this.state.categories.get(index).get('id');
+      var postBody = this.state.categories.get(index).get('post');
+      var data = { category_id: categoryId, post_body: postBody };
+
+      $.ajax({
+        type: "POST",
+        url: "/posts",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8"
+      });
+    },
+
+    _onPostChange: function(index, event) {
+      var newValue = this.state.categories.get(index).set('post', event.target.value);
+      var newState = { categories: this.state.categories.set(index, newValue) };
+      this.setState(newState);
     },
 
     _focusKeyInput: function() {
