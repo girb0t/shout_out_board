@@ -10,14 +10,23 @@ var NewPostForm = NewPostForm || {};
       };
     },
 
+    componentDidMount: function() {
+      $('#key-input-container input').focus();
+    },
+
     render: function() {
       var keyValidationMessageClass = this.state.key.get('isActive') ? "text-success" : "text-danger";
       return (
         <div>
-          <label className="col-md-1" htmlFor="key">Key</label>
-          <div className="col-sm-3">
-            <input type="text" value={this.state.key.get('value')} onChange={this._onKeyChange} className="form-control" id="key" />
-            <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
+          <div id="key-input-container" className="col-md-4 col-md-offset-4">
+            <div className="">
+              <input type="text"
+                     value={this.state.key.get('value')}
+                     onChange={this._onKeyChange}
+                     className="form-control" id="key"
+                     placeholder="Enter Key" />
+              <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
+            </div>
           </div>
         </div>
       );
