@@ -10,7 +10,7 @@ end
 
 def create_board(key, title, category_count)
   board = Board.create(key: key, title: title)
-  categories = [ { tab_name: "New",title:"Something new I learned...", prompt: "Something I'm *grateful* for in the club is...", post_count: 40},
+  categories = [ { tab_name: "New",title:"Something new I learned...", prompt: "Something *new* I learned today is...", post_count: 40},
                  { tab_name: "Struggle",title:"Something I strugged with...", prompt: "Something I struggled with today is...", post_count: 12},
                  { tab_name: "Awesome",title:"Something awesome I saw someone else doing...", prompt: "Something awesome I saw someone else doing is...", post_count: 2 } ]
 
