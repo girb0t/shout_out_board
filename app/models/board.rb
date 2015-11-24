@@ -1,5 +1,6 @@
 class Board < ActiveRecord::Base
   has_many :categories
+  has_many :posts, through: :categories
   validates :key, presence: true, uniqueness: true
   validates :title, presence: true
   validates :active, presence: true
