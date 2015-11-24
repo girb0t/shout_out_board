@@ -11,11 +11,13 @@ class BoardsController < ApplicationController
   def create
     form_data = JSON.parse(params["form-data-json"])
     board = Board.new( key: form_data['key']['value'],
-                               title: form_data['title']['title'])
+                       title: form_data['title']['title'])
 
     (1..form_data["categoryCount"]).each do |i|
       category_hash = form_data["category" + i.to_s]
-      category = Category.new(title: category_hash["title"], prompt: category_hash["prompt"])
+      category = Category.new(title: category_hash["title"],
+                              tab_name: category_hash["tabName"],
+                              prompt: category_hash["prompt"])
 
       board.categories.push(category)
     end

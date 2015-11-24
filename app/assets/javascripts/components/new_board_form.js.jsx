@@ -13,10 +13,9 @@ var NewBoardForm = NewBoardForm || {};
         key: Immutable.Map({isValid: false, value: "", validationMessage:""}),
         title: Immutable.Map({title: "", validationMessage: ""}),
         categoryCount: 2,
-        category1: Immutable.Map({title: "", prompt: "", validationMessage:""}),
-        category2: Immutable.Map({title: "", prompt: "", validationMessage:""}),
-        category3: Immutable.Map({title: "", prompt: "", validationMessage:""}),
-        category4: Immutable.Map({title: "", prompt: "", validationMessage:""}),
+        category1: Immutable.Map({title: "", prompt: "", tabName: "", validationMessage:""}),
+        category2: Immutable.Map({title: "", prompt: "", tabName: "", validationMessage:""}),
+        category3: Immutable.Map({title: "", prompt: "", tabName: "", validationMessage:""}),
       };
     },
 
@@ -49,7 +48,6 @@ var NewBoardForm = NewBoardForm || {};
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="4">4</option>
                 </select>
               </div>
             </div>
@@ -103,8 +101,8 @@ var NewBoardForm = NewBoardForm || {};
 
       for (var i = 0; i < this.state.categoryCount; ++i) {
         categoryObj = this.state["category" + (i+1)];
-        if (categoryObj.get("title").length === 0 || categoryObj.get("prompt").length === 0) {
-          newState["category" + (i+1)] = categoryObj.set("validationMessage", "'Title' and 'Prompt' can't be blank.");
+        if (categoryObj.get("title").length === 0 || categoryObj.get("prompt").length === 0 || categoryObj.get("tabName").length === 0) {
+          newState["category" + (i+1)] = categoryObj.set("validationMessage", "'Title', 'Tab Name', and 'Prompt' can't be blank.");
           isValid = false;
         } else {
           newState["category" + (i+1)] = categoryObj.set("validationMessage", "");
@@ -161,6 +159,12 @@ var NewBoardForm = NewBoardForm || {};
       this.setState(newState);
     },
 
+    onCategoryTabNameChange: function(name, event) {
+      var newState = {};
+      newState[name] = this.state[name].set('tabName', event.target.value);
+      this.setState(newState);
+    },
+
     onCategoryBodyChange: function(name, event) {
       var newState = {};
       newState[name] = this.state[name].set('prompt', event.target.value);
@@ -169,18 +173,22 @@ var NewBoardForm = NewBoardForm || {};
 
     buildCategorySection: function() {
       var categoryId,
-          titleText,
-          bodyText,
           titleId,
+          titleText,
+          tabNameId,
+          tabNameText,
           bodyId,
+          bodyText,
           categoryCount = this.state.categoryCount,
           categoryNodes = [];
 
       for (var i = 0; i < categoryCount; ++i) {
         categoryId = "category" + (i+1);
         titleId = categoryId + "-title";
-        bodyId = categoryId + "-prompt";
         titleText = this.state[categoryId].get("title");
+        tabNameId = categoryId + "-tab-name";
+        tabNameText = this.state[categoryId].get("tabName");
+        bodyId = categoryId + "-prompt";
         bodyText = this.state[categoryId].get("prompt");
 
         categoryNodes.push(
@@ -195,9 +203,15 @@ var NewBoardForm = NewBoardForm || {};
               </div>
             </div>
             <div className="form-group">
+              <label className="col-sm-3" htmlFor={tabNameId}>Cat. {i + 1} Tab Name</label>
+              <div className="col-sm-2">
+                <input value={tabNameText} type="text" onChange={this.onCategoryTabNameChange.bind(this, categoryId)} className="form-control" id={tabNameId} />
+              </div>
+            </div>
+            <div className="form-group">
               <label className="col-md-3" htmlFor={bodyId}>Cat. {i + 1} Prompt</label>
               <div className="col-md-6">
-                <textarea value={bodyText} onChange={this.onCategoryBodyChange.bind(this, categoryId)} className="form-control" id={titleId} name={titleId}  />
+                <textarea value={bodyText} onChange={this.onCategoryBodyChange.bind(this, categoryId)} className="form-control" id={bodyId} name={bodyId}  />
               </div>
             </div>
             <hr/>
