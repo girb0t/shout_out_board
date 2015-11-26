@@ -3,7 +3,7 @@ class Board < ActiveRecord::Base
   has_many :posts, through: :categories
   validates :key, presence: true, uniqueness: true
   validates :title, presence: true
-  validates :active, presence: true
+  validates :active, inclusion: { in: [true, false] }
 
   def self.is_unique_key?(key)
     return self.where(key: key).empty?
