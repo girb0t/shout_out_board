@@ -1,4 +1,8 @@
 class BoardsController < ApplicationController
+  def index
+    @boards = Board.active
+  end
+
   def new
   end
 

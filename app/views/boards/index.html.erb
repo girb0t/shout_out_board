@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>All Boards:</h1><br>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Title</th>
+        <th>Active</th>
+      <tr>
+    </thead>
+    <tbody>
+
+    <% @boards.each do |board| %>
+      <tr>
+        <td><%= link_to board.key, "/boards/#{board.key}" %><br/></td>
+        <td><%= board.title %></td>
+        <td><%= board.active %></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+
+</div>
