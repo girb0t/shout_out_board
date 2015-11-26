@@ -1,10 +1,6 @@
 <div class="container">
   <h1 id="hello-world">Shout Out Board</h1>
+  <%= link_to "Board Index", boards_index_path %><br>
   <%= link_to "Create New Board", boards_new_path %><br>
   <%= link_to "Post To Existing Board", posts_new_path %><br>
-  <br>
-  <span>Active Boards:</span><br>
-  <% @boards.each do |board| %>
-    <%= link_to board.key, "boards/#{board.key}" %><br/>
-  <% end %>
 </div>
