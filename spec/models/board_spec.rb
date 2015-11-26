@@ -8,6 +8,8 @@ describe Board do
   end
 
   let(:board) { build(:board) }
+  let(:active_board) { create(:active_board) }
+  let(:inactive_board) { create(:inactive_board) }
 
   describe "validations" do
     it { expect(board).to validate_presence_of(:key) }
@@ -22,9 +24,20 @@ describe Board do
 
   describe "public class methods" do
     describe "#self.is_active_key?" do
-      it "returns true for active key"
-      it "returns false for inactive key"
-      it "returns false for nonexistent key"
+      it "returns true if active board exists with the key" do
+        key = active_board["key"]
+        expect(Board.is_active_key?(key)).to be true
+      end
+
+      it "returns false if inactive board exists with the key" do
+        key = inactive_board["key"]
+        expect(Board.is_active_key?(key)).to be false
+      end
+
+      it "returns false for nonexistent key" do
+        key = "bad_key"
+        expect(Board.is_active_key?(key)).to be false
+      end
     end
 
     describe "#self.is_unique_key?" do
