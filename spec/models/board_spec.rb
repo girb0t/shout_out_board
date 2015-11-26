@@ -35,14 +35,20 @@ describe Board do
       end
 
       it "returns false for nonexistent key" do
-        key = "bad_key"
+        key = "nonexistent_key"
         expect(Board.is_active_key?(key)).to be false
       end
     end
 
     describe "#self.is_unique_key?" do
-      it "returns true if key isn't already taken"
-      it "returns false if key is already taken"
+      it "returns true if key isn't already taken" do
+        key = "nonexistent_key"
+        expect(Board.is_unique_key?(key)).to be true
+      end
+      it "returns false if key is already taken" do
+        key = active_board["key"]
+        expect(Board.is_unique_key?(key)).to be false
+      end
     end
   end
 end
