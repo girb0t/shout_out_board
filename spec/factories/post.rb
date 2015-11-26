@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :post do
-    body Faker::Lorem.sentence
+    body Faker::Hipster.sentence
   end
 end
