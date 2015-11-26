@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :post do
-    body "Yolo"
+    body Faker::Lorem.sentence
   end
 end
