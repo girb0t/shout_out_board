@@ -5,6 +5,8 @@ class Board < ActiveRecord::Base
   validates :title, presence: true
   validates :active, inclusion: { in: [true, false] }
 
+  scope :active, -> { where(active: true) }
+
   def self.is_unique_key?(key)
     return self.where(key: key).empty?
   end
