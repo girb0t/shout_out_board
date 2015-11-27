@@ -37,7 +37,7 @@ var NewPostForm = NewPostForm || {};
             </div>
           </div>
 
-          <div id="post-form-container" className="col-md-8 col-md-offset-2">
+          <div id="post-form-container" className="col-md-6 col-md-offset-3">
             <ul className="nav nav-tabs" role="tablist">
               {tabNodes}
             </ul>
@@ -74,7 +74,6 @@ var NewPostForm = NewPostForm || {};
         return(
           <div role="tabpanel" className={className} id={id} key={index}>
             <h3>{category.get('prompt')}</h3>
-            <label htmlFor={inputId}>{category.get('prompt')}</label>
             <textarea className="form-control" id={inputId} name={inputId} value={inputVal} onChange={that._onPostChange.bind(that, index)} />
             <button className="btn btn-primary" type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
           </div>
