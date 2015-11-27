@@ -23,6 +23,7 @@ var BoardStage = BoardStage || {};
 
     componentDidUpdate: function() {
       this._adjustDimensions();
+      this._scrollToCategoriesBottom();
     },
 
     render: function() {
@@ -111,6 +112,10 @@ var BoardStage = BoardStage || {};
       }
     },
 
+    _scrollToCategoriesBottom: function() {
+      $(".category-col").scrollTop($(".category-col")[0].scrollHeight);
+    },
+
     _initiateLongPolling: function() {
       var that = this;
       (function poll() {
@@ -118,18 +123,25 @@ var BoardStage = BoardStage || {};
           $.ajax({
             dataType: "json",
             url: "/boards/" + that.state.boardKey + ".json",
+            data: { post_count: that._postCount() },
             success: function(result) {
               result = Immutable.fromJS(result);
-              that.setState({
-                title: result.get('title'),
-                categories: result.get('categories'),
-                isActive: result.get('active'),
-              });
+              if (result.get('categories')) {
+                that.setState({ categories: result.get('categories'), });
+              }
               poll();
             }
           });
         }, 3000);
       })();
+    },
+
+    _postCount: function() {
+      var postCount = 0;
+      this.state.categories.forEach(function(c){
+        postCount += c.get('posts').size;
+      });
+      return postCount;
     },
   });
 })();
