@@ -47,7 +47,7 @@ var BoardStage = BoardStage || {};
       var that = this;
       $.ajax({
         dataType: "json",
-        url: this.state.boardKey + ".json",
+        url: "/boards/" + this.state.boardKey + ".json",
         success: function(result) {
           result = Immutable.fromJS(result);
           that.setState({
