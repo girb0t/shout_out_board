@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def create
     new_post = Post.new(category_id: params['category_id'], body: params['post_body'])
     new_post.save
-    render nothing: true
+    render json: { status: 'ok', categoryId: params['category_id'] }
   end
 
   def validate_key

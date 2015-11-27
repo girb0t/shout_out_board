@@ -67,15 +67,22 @@ var NewPostForm = NewPostForm || {};
     _tabContentNodes: function() {
       var that = this;
       var result = this.state.categories.map(function(category, index) {
-        var className = that.state.activeTab === index ? "tab-pane active" : "tab-pane";
+        var tabPaneClassName = that.state.activeTab === index ? "tab-pane active" : "tab-pane";
         var id = "category-" + index;
         var inputId = id + "-input";
         var inputVal = category.get('post');
+        var textareaDisabled = "";
+        var buttonClassName = "btn btn-primary";
+        if (category.get('submitted')) {
+          textareaDisabled = "disabled";
+          buttonClassName += " disabled";
+          inputVal = "Post Submitted! Thank you :)";
+        }
         return(
-          <div role="tabpanel" className={className} id={id} key={index}>
+          <div role="tabpanel" className={tabPaneClassName} id={id} key={index}>
             <h3>{category.get('prompt')}</h3>
-            <textarea className="form-control" id={inputId} name={inputId} value={inputVal} onChange={that._onPostChange.bind(that, index)} />
-            <button className="btn btn-primary" type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
+            <textarea className="form-control" disabled={textareaDisabled} id={inputId} name={inputId} value={inputVal} onChange={that._onPostChange.bind(that, index)} />
+            <button className={buttonClassName} type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
           </div>
         );
       });
@@ -133,7 +140,20 @@ var NewPostForm = NewPostForm || {};
         type: "POST",
         url: "/posts",
         data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8"
+        contentType: "application/json; charset=utf-8",
+        success: function(response) {
+          // For some reason, I can't access categoryId and other variables outside the
+          // scope of this success function.
+
+          var categoryIndex = this.state.categories.findIndex(function(c){
+            return c.get('id') === response.categoryId;
+          });
+          var newState = this.state.categories.setIn([categoryIndex,'submitted'], true);
+          this.setState({ categories: newState });
+        }.bind(this),
+        error: function(response) {
+          // handle error
+        }
       });
     },
 
@@ -148,7 +168,6 @@ var NewPostForm = NewPostForm || {};
     },
 
     _initNavTabEventListeners: function() {
-      var that = this;
       $('#post-form-container .nav-tabs a').click(function(e) {
         e.preventDefault();
         $(this).tab('show');
