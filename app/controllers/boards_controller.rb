@@ -40,9 +40,6 @@ class BoardsController < ApplicationController
         render json: Board.find_by(key: params["key"])
                           .to_board_stage_json
       end
-
     end
-
-
   end
 end
