@@ -120,8 +120,10 @@ var NewPostForm = NewPostForm || {};
 
             that.setState(newState);
           },
-          error: function(response) {
-            //handle error
+          error: function(e) {
+            if (e.readyState === 4) { // if error is not a result of `.abort()`
+              //handle error
+            }
           }
         });
       } else {
