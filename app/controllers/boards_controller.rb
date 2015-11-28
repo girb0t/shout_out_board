@@ -37,7 +37,7 @@ class BoardsController < ApplicationController
       }
 
       format.json do
-        if new_posts_available?
+        if new_posts_available? || params["post_count"].nil?
           render json: Board.find_by(key: params["key"])
                             .to_board_stage_json
         else
