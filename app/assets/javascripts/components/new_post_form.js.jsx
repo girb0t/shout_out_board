@@ -20,6 +20,10 @@ var NewPostForm = NewPostForm || {};
       this._initNavTabEventListeners();
     },
 
+    requests: {
+      validateKey: {},
+    },
+
     render: function() {
       var keyValidationMessageClass = this.state.key.get('isActive') ? "text-success" : "text-danger";
       var tabNodes = this._tabNodes();
@@ -95,7 +99,8 @@ var NewPostForm = NewPostForm || {};
       var goodKeyMessage = "Good Key!";
       var badKeyMessage = "Bad Key :(";
       if (key.length >= 4) {
-        $.ajax({
+        if (this.requests.validateKey.abort) { this.requests.validateKey.abort(); }
+        this.requests.validateKey = $.ajax({
           url: "/posts/validate_key",
           type: "GET",
           data: {key: key},
