@@ -33,7 +33,6 @@ var NewPostForm = NewPostForm || {};
           <div id="key-input-container" className="col-md-4 col-md-offset-4">
             <div className="">
               <input type="text"
-                     value={this.state.key.get('value')}
                      onChange={this._onKeyChange}
                      className="form-control" id="key"
                      placeholder="Enter Key" />
