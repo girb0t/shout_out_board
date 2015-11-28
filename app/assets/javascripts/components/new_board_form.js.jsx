@@ -29,7 +29,7 @@ var NewBoardForm = NewBoardForm || {};
             <div className="form-group">
               <label className="col-sm-1 col-md-1" htmlFor="key">Key</label>
               <div className="col-sm-3">
-                <input type="text" value={this.state.key.get('value')} onChange={this.onKeyChange} className="form-control" id="key" />
+                <input type="text" onChange={this.onKeyChange} className="form-control" id="key" />
                 <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
               </div>
             </div>
