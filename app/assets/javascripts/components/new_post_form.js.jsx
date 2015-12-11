@@ -115,8 +115,8 @@ var NewPostForm = NewPostForm || {};
             });
 
 
-            var categories = Immutable.fromJS(response.categories);
-            if(categories) {
+            if(response.categories) {
+              var categories = Immutable.fromJS(response.categories);
               categories = categories.map(function(c){
                 var cookieKey = response.key + c.get('id') + '-submitted';
                 if (Cookies.get(cookieKey)){
@@ -125,9 +125,9 @@ var NewPostForm = NewPostForm || {};
                   return c;
                 }
               });
+              newState.categories = categories;
             }
 
-            newState.categories = categories;
             that.setState(newState);
           },
           error: function(e) {
