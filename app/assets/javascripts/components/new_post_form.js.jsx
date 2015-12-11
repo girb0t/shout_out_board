@@ -114,10 +114,20 @@ var NewPostForm = NewPostForm || {};
               categories: that.getInitialState().categories,
             });
 
-            if(response.categories) {
-              newState.categories = Immutable.fromJS(response.categories);
+
+            var categories = Immutable.fromJS(response.categories);
+            if(categories) {
+              categories = categories.map(function(c){
+                var cookieKey = response.key + c.get('id') + '-submitted';
+                if (Cookies.get(cookieKey)){
+                  return c.set('submitted', true);
+                } else {
+                  return c;
+                }
+              });
             }
 
+            newState.categories = categories;
             that.setState(newState);
           },
           error: function(e) {
@@ -142,6 +152,9 @@ var NewPostForm = NewPostForm || {};
       var postBody = this.state.categories.get(index).get('post');
       var data = { category_id: categoryId, post_body: postBody };
 
+      var cookieKey = this.state.key.get('value') + categoryId + '-submitted';
+      var cookieExpiresInDays = 1/24 * 2;     // two hours
+      Cookies.set(cookieKey, true, { expires: cookieExpiresInDays });
       $.ajax({
         type: "POST",
         url: "/posts",
