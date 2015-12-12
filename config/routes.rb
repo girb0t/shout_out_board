@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root 'home#show'
+  root 'posts#new'
+
+  # TO DO: Create a proper admin controller.
+  get '/admin',                    to: 'home#show'
 
   # boards
   get  '/boards/index',           to: 'boards#index'
