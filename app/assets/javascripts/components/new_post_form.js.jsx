@@ -79,8 +79,8 @@ var NewPostForm = NewPostForm || {};
         var answerVal = category.get('post');
         var textareaDisabled = "";
         var textareaStyle = {
-          color: that._isValidHex(that.state.fontColorHex) ? that.state.fontColorHex : that.getInitialState.fontColorHex,
-          backgroundColor: that._isValidHex(that.state.bgColorHex) ? that.state.bgColorHex : that.getInitialState.bgColorHex,
+          color: that._getFontColorHex(),
+          backgroundColor: that._getBgColorHex(),
         }
         var buttonClassName = "btn btn-primary";
         if (category.get('submitted')) {
@@ -185,7 +185,14 @@ var NewPostForm = NewPostForm || {};
     _onSubmit: function(index, event) {
       var categoryId = this.state.categories.get(index).get('id');
       var postBody = this.state.categories.get(index).get('post');
-      var data = { category_id: categoryId, post_body: postBody };
+      var bgColorHex = this._getBgColorHex();
+      var fontColorHex = this._getFontColorHex();
+      var data = {
+        category_id: categoryId,
+        post_body: postBody,
+        bg_color_hex: bgColorHex,
+        font_color_hex: fontColorHex
+      };
 
       var cookieKey = this.state.key.get('value') + categoryId + '-submitted';
       var cookieExpiresInDays = 1/24 * 2;     // two hours
@@ -241,6 +248,14 @@ var NewPostForm = NewPostForm || {};
     // e.g. '#ac0' or '#fff000'
     _isValidHex: function(hexVal) {
       return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hexVal);
+    },
+
+    _getBgColorHex: function() {
+      return this._isValidHex(this.state.bgColorHex) ? this.state.bgColorHex : this.getInitialState.bgColorHex;
+    },
+
+    _getFontColorHex: function() {
+      return this._isValidHex(this.state.fontColorHex) ? this.state.fontColorHex : this.getInitialState.fontColorHex;
     },
 
     _focusKeyInput: function() {
