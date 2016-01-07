@@ -184,14 +184,11 @@ var NewPostForm = NewPostForm || {};
 
     _onSubmit: function(index, event) {
       var categoryId = this.state.categories.get(index).get('id');
-      var postBody = this.state.categories.get(index).get('post');
-      var bgColorHex = this._getBgColorHex();
-      var fontColorHex = this._getFontColorHex();
       var data = {
         category_id: categoryId,
-        post_body: postBody,
-        bg_color_hex: bgColorHex,
-        font_color_hex: fontColorHex
+        post_body: this.state.categories.get(index).get('post'),
+        bg_color_hex: this._getBgColorHex(),
+        font_color_hex: this._getFontColorHex(),
       };
 
       var cookieKey = this.state.key.get('value') + categoryId + '-submitted';
