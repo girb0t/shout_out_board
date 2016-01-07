@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123224036) do
+ActiveRecord::Schema.define(version: 20160107102856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 20151123224036) do
 
   create_table "posts", force: :cascade do |t|
     t.integer  "category_id"
-    t.text     "body",        null: false
+    t.text     "body",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "background_color_hex", limit: 7
+    t.string   "font_color_hex",       limit: 7
   end
 
 end
