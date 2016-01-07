@@ -9,6 +9,8 @@ var NewPostForm = NewPostForm || {};
         key: Immutable.Map({isActive: false, value: "", validationMessage: ""}),
         categories: Immutable.List(),
         activeTab: 0,
+        bgColorHex: '#ffffff',
+        fontColorHex: '#000000',
       };
     },
 
@@ -34,7 +36,8 @@ var NewPostForm = NewPostForm || {};
             <div className="">
               <input type="text"
                      onChange={this._onKeyChange}
-                     className="form-control" id="key"
+                     id="key"
+                     className="form-control"
                      placeholder="Enter Key" />
               <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
             </div>
@@ -72,29 +75,44 @@ var NewPostForm = NewPostForm || {};
       var result = this.state.categories.map(function(category, index) {
         var tabPaneClassName = that.state.activeTab === index ? "tab-pane active" : "tab-pane";
         var id = "category-" + index;
-        var inputId = id + "-input";
-        var inputVal = category.get('post');
+        var answerId = id + "-answer";
+        var answerVal = category.get('post');
         var textareaDisabled = "";
+        var textareaStyle = {
+          color: that.state.fontColorHex,
+          backgroundColor: that._isValidHex(that.state.bgColorHex) ? that.state.bgColorHex : that.getInitialState.bgColorHex,
+        }
         var buttonClassName = "btn btn-primary";
         if (category.get('submitted')) {
           textareaDisabled = "disabled";
           buttonClassName += " disabled";
-          inputVal = "Post Submitted! Thank you :)";
+          answerVal = "Post Submitted! Thank you :)";
         }
         return(
           <div role="tabpanel" className={tabPaneClassName} id={id} key={index}>
             <h3>{category.get('prompt')}</h3>
             <textarea className="form-control"
                       disabled={textareaDisabled}
-                      id={inputId}
-                      name={inputId}
-                      value={inputVal}
-                      onChange={that._onPostChange.bind(that, index)} />
+                      style={textareaStyle}
+                      id={answerId}
+                      name={answerId}
+                      value={answerVal}
+                      onChange={that._onAnswerChange.bind(that, index)} />
+            {that._colorControlNode()}
             <button className={buttonClassName} type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
           </div>
         );
       });
       return result;
+    },
+
+    _colorControlNode: function() {
+      return (
+        <input type="text"
+               className="bg-color-hex"
+               value={this.state.bgColorHex}
+               onChange={this._onBgColorHexChange} />
+      );
     },
 
     _onKeyChange: function(event) {
@@ -181,10 +199,26 @@ var NewPostForm = NewPostForm || {};
       });
     },
 
-    _onPostChange: function(index, event) {
+    _onAnswerChange: function(index, event) {
       var newValue = this.state.categories.get(index).set('post', event.target.value);
       var newState = { categories: this.state.categories.set(index, newValue) };
       this.setState(newState);
+    },
+
+    _onBgColorHexChange: function(event) {
+      var hexVal = event.target.value
+      if (hexVal[0] !== '#') {
+        hexVal = '#' + hexVal;
+      }
+      this.setState({
+        bgColorHex: hexVal,
+      })
+    },
+
+    // Takes 3 or 6-character hex values
+    // e.g. '#ac0' or '#fff000'
+    _isValidHex: function(hexVal) {
+      return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hexVal);
     },
 
     _focusKeyInput: function() {
