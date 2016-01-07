@@ -3,8 +3,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    # TODO: Save params[:bg_color_hex] and params[:font_color_hex]
-    new_post = Post.new(category_id: params[:category_id], body: params[:post_body])
+    new_post = Post.new(category_id: params[:category_id],
+                        body: params[:post_body],
+                        background_color_hex: params[:bg_color_hex],
+                        font_color_hex: params[:font_color_hex] )
     new_post.save
     render json: { status: 'ok', categoryId: params[:category_id] }
   end
