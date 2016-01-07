@@ -32,6 +32,10 @@ var BoardStage = BoardStage || {};
           <BoardStage.Post
             key={index}
             body={post.get('body')}
+            style={{
+              color: post.get('font_color_hex'),
+              backgroundColor: post.get('background_color_hex'),
+            }}
           />
         );
       });

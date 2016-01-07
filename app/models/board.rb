@@ -18,7 +18,7 @@ class Board < ActiveRecord::Base
   def to_board_stage_json
     self.to_json(:only => [:key, :title, :active],
                  :include => { :categories => {:only => [:title],
-                                               :include => {:posts => {:only => [:body]}}}
+                                               :include => {:posts => {:only => [:body, :background_color_hex, :font_color_hex]}}}
                                               }
                 )
   end
