@@ -9,7 +9,7 @@ var NewPostForm = NewPostForm || {};
         key: Immutable.Map({isActive: false, value: "", validationMessage: ""}),
         categories: Immutable.List(),
         activeTab: 0,
-        bgColorHex: '#ffffff',
+        bgColorHex: '#bfff80',
         fontColorHex: '#000000',
       };
     },
@@ -79,7 +79,7 @@ var NewPostForm = NewPostForm || {};
         var answerVal = category.get('post');
         var textareaDisabled = "";
         var textareaStyle = {
-          color: that.state.fontColorHex,
+          color: that._isValidHex(that.state.fontColorHex) ? that.state.fontColorHex : that.getInitialState.fontColorHex,
           backgroundColor: that._isValidHex(that.state.bgColorHex) ? that.state.bgColorHex : that.getInitialState.bgColorHex,
         }
         var buttonClassName = "btn btn-primary";
@@ -91,7 +91,7 @@ var NewPostForm = NewPostForm || {};
         return(
           <div role="tabpanel" className={tabPaneClassName} id={id} key={index}>
             <h3>{category.get('prompt')}</h3>
-            <textarea className="form-control"
+            <textarea className="form-control form-input-row"
                       disabled={textareaDisabled}
                       style={textareaStyle}
                       id={answerId}
@@ -108,10 +108,22 @@ var NewPostForm = NewPostForm || {};
 
     _colorControlNode: function() {
       return (
-        <input type="text"
-               className="bg-color-hex"
-               value={this.state.bgColorHex}
-               onChange={this._onBgColorHexChange} />
+        <div>
+          <div className="form-input-row">
+            Background Color:
+            <input type="text"
+                   className="bg-color-hex"
+                   value={this.state.bgColorHex}
+                   onChange={this._onBgColorHexChange} />
+          </div>
+          <div className="form-input-row">
+            Font Color:
+            <input type="text"
+                   className="font-color-hex"
+                   value={this.state.fontColorHex}
+                   onChange={this._onFontColorHexChange} />
+          </div>
+        </div>
       );
     },
 
@@ -213,6 +225,16 @@ var NewPostForm = NewPostForm || {};
       this.setState({
         bgColorHex: hexVal,
       })
+    },
+
+    _onFontColorHexChange: function(event) {
+      var hexVal = event.target.value;
+      if (hexVal[0] !== '#') {
+        hexVal = '#' + hexVal;
+      }
+      this.setState({
+        fontColorHex: hexVal,
+      });
     },
 
     // Takes 3 or 6-character hex values
