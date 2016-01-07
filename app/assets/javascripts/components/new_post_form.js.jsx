@@ -84,7 +84,12 @@ var NewPostForm = NewPostForm || {};
         return(
           <div role="tabpanel" className={tabPaneClassName} id={id} key={index}>
             <h3>{category.get('prompt')}</h3>
-            <textarea className="form-control" disabled={textareaDisabled} id={inputId} name={inputId} value={inputVal} onChange={that._onPostChange.bind(that, index)} />
+            <textarea className="form-control"
+                      disabled={textareaDisabled}
+                      id={inputId}
+                      name={inputId}
+                      value={inputVal}
+                      onChange={that._onPostChange.bind(that, index)} />
             <button className={buttonClassName} type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
           </div>
         );
