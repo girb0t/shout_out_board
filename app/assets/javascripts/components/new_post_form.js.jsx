@@ -81,7 +81,7 @@ var NewPostForm = NewPostForm || {};
         var textareaStyle = {
           color: that._getFontColorHex(),
           backgroundColor: that._getBgColorHex(),
-        }
+        };
         var buttonClassName = "btn btn-primary";
         if (category.get('submitted')) {
           textareaDisabled = "disabled";
@@ -222,13 +222,13 @@ var NewPostForm = NewPostForm || {};
     },
 
     _onBgColorHexChange: function(event) {
-      var hexVal = event.target.value
+      var hexVal = event.target.value;
       if (hexVal[0] !== '#') {
         hexVal = '#' + hexVal;
       }
       this.setState({
         bgColorHex: hexVal,
-      })
+      });
     },
 
     _onFontColorHexChange: function(event) {
