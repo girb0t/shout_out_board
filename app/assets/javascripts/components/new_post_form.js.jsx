@@ -108,22 +108,28 @@ var NewPostForm = NewPostForm || {};
 
     _colorControlNode: function() {
       return (
-        <div>
+        <div className="color-control">
           <div className="form-input-row">
-            Background Color:
+            Background Color Hex {this._hexColorHelpNode()}:
             <input type="text"
                    className="bg-color-hex"
                    value={this.state.bgColorHex}
                    onChange={this._onBgColorHexChange} />
           </div>
           <div className="form-input-row">
-            Font Color:
+            Font Color Hex:
             <input type="text"
                    className="font-color-hex"
                    value={this.state.fontColorHex}
                    onChange={this._onFontColorHexChange} />
           </div>
         </div>
+      );
+    },
+
+    _hexColorHelpNode: function() {
+      return (
+        <span>(<a href="http://www.w3schools.com/cssref/css_colors.asp" target="_blank">What's Hex?!</a>)</span>
       );
     },
 
