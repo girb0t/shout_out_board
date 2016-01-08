@@ -30,6 +30,11 @@ class BoardsController < ApplicationController
     redirect_to "/boards/#{board.key}"
   end
 
+  def update
+    Board.find_by(key: params[:key]).update(board_params)
+    redirect_to boards_path
+  end
+
   def show
     respond_to do |format|
       format.html {
@@ -49,6 +54,10 @@ class BoardsController < ApplicationController
 
 
   private
+
+  def board_params
+    params.require(:board).permit(:active)
+  end
 
   def new_posts_available?
     if params["post_count"].to_i == Board.find_by(key: params["key"]).posts.count
