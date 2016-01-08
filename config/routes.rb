@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/admin',                    to: 'home#show'
 
   # boards
-  get  '/boards/index',           to: 'boards#index'
+  get  '/boards',                 to: 'boards#index'
   get  '/boards/new',             to: 'boards#new'
   post '/boards',                 to: 'boards#create'
   get  '/boards/validate_key',    to: 'boards#validate_key'
