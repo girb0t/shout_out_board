@@ -83,9 +83,8 @@ var NewPostForm = NewPostForm || {};
           backgroundColor: that._getBgColorHex(),
         };
         var buttonClassName = "btn btn-primary";
+        var isSubmitted = category.get('submitted') ? true : false;
         if (category.get('submitted')) {
-          textareaDisabled = "disabled";
-          buttonClassName += " disabled";
           answerVal = "Post Submitted! Thank you :)";
         }
         return(
@@ -97,9 +96,13 @@ var NewPostForm = NewPostForm || {};
                       id={answerId}
                       name={answerId}
                       value={answerVal}
+                      disabled={isSubmitted}
                       onChange={that._onAnswerChange.bind(that, index)} />
             {that._colorControlNode()}
-            <button className={buttonClassName} type="button" onClick={that._onSubmit.bind(that, index)}>Submit</button>
+            <button className={buttonClassName}
+                    disabled={isSubmitted}
+                    type="button"
+                    onClick={that._onSubmit.bind(that, index)}>Submit</button>
           </div>
         );
       });
@@ -132,6 +135,7 @@ var NewPostForm = NewPostForm || {};
         <span>(<a href="http://www.w3schools.com/cssref/css_colors.asp" target="_blank">What's Hex?!</a>)</span>
       );
     },
+    // '
 
     _onKeyChange: function(event) {
       var that = this;
