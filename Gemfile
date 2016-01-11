@@ -10,6 +10,7 @@ gem 'awesome_print'
 gem 'jquery-rails'
 gem 'react-rails', '~> 1.4.0'
 gem 'font-awesome-rails'
+gem 'devise'
 
 group :development, :test do
   gem 'pry-rails'
