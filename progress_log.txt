@@ -1,1 +1,2 @@
 1/11/2016 - Create mockups for authentication workflow.
+1/12/2016 - branch add_auth: Generate Devise User model/migration.
