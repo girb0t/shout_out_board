@@ -22,7 +22,9 @@ def create_board(key, title, category_count)
 
     c[:post_count].times do
       Post.create({ category_id: category.id,
-                    body: lorem })
+                    body: lorem,
+                    font_color_hex: '#000000',
+                    background_color_hex: '#bfff80' })
     end
   end
 end
