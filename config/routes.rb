@@ -16,4 +16,7 @@ Rails.application.routes.draw do
   get  '/posts/new',              to: 'posts#new'
   get  '/posts/validate_key',     to: 'posts#validate_key'
   post '/posts',                  to: 'posts#create'
+
+  # users
+  get '/users/new',               to: 'users#new'
 end
