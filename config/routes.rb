@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   post '/posts',                  to: 'posts#create'
 
   # users
-  get '/users/new',               to: 'users#new'
+  get  '/users/new',              to: 'users#new'
+  post '/users',                  to: 'users#create'
 end

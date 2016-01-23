@@ -3,6 +3,10 @@ var NewUserForm = NewUserForm || {};
 (function() {
   "use strict";
   NewUserForm = React.createClass({
+    endpoints: {
+      submitForm: '/users'
+    },
+
     getInitialState: function() {
       return {
         username: '',
@@ -53,6 +57,13 @@ var NewUserForm = NewUserForm || {};
 
     _onSubmit: function() {
       console.log(this.state);
+      var form = $('form.new-user-form-data');
+      var jsonInputField= form.find('#form-data-json');
+      var url = this.endpoints.submitForm;
+
+      form.attr('action', url);
+      jsonInputField.val(JSON.stringify(Immutable.fromJS(this.state).toJS()));
+      form.sumbit();
     },
 
     _onEmailChange: function(event) {
