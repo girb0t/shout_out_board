@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to "Shout Out", root_path, class: 'navbar-brand' %>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <% if logged_in? %>
+        <li><p class="navbar-text">Hello <a href='#'><%= current_user.first_name %></a></p></li>
+        <li><a href='/logout'>Log Out</a></li>
+      <% else %>
+        <li><a href='/login'>Log In</a></li>
+        <li><a href='/signup'>Sign Up</a></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
