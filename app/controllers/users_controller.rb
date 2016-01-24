@@ -12,9 +12,11 @@ class UsersController < ApplicationController
                      password: user_params['password'],
                      password_confirmation: user_params['confirmPassword'] )
     if user.save
+      flash[:success] = "Successfully created an account. Welcome aboard #{user.first_name}!"
       session[:user_id] = user.id
       redirect_to '/'
     else
+      flash[:danger] = "Sorry. Something went wrong :'("
       redirect_to '/signup'
     end
   end
