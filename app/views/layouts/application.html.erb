@@ -8,6 +8,19 @@
 </head>
 <body>
   <div>
+    <%= render 'layouts/navbar' %>
+
+    <% flash_types = [:success, :info, :warning, :danger] %>
+    <% flash_types.each do |flash_type| %>
+      <% if flash[flash_type] %>
+        <div class="row">
+          <div class="alert alert-<%= flash_type.to_s %> col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <%= flash[flash_type] %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </div>
 </body>

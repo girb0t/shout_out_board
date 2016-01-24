@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Create Account</h1>
+  <div id="new-user-form-container">
+  </div>
+  <div style='display:none'>
+    <%= form_tag('#', {class: 'new-user-form-data', method: 'post'}) do %>
+      <%= hidden_field_tag 'form-data-json' %>
+    <% end %>
+
+  </div>
+</div>
+
+<script>
+  ReactDOM.render(
+    React.createElement(NewUserForm, {}),
+    document.getElementById('new-user-form-container')
+  );
+</script>

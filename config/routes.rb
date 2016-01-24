@@ -16,4 +16,13 @@ Rails.application.routes.draw do
   get  '/posts/new',              to: 'posts#new'
   get  '/posts/validate_key',     to: 'posts#validate_key'
   post '/posts',                  to: 'posts#create'
+
+  # users
+  get  '/signup',                 to: 'users#new'
+  post '/users',                  to: 'users#create'
+
+  # sessions
+  get '/logout',                  to: 'sessions#destroy'
+  get '/login',                   to: 'sessions#new'
+  post '/login',                  to: 'sessions#create'
 end
