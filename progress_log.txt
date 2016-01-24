@@ -2,3 +2,4 @@
 1/12/2016 - branch:add_auth - Generate Devise User model/migration.
 1/13/2016 - branch:add_auth - tweak Devise configurations
 1/17/2016 - branch:add_auth - Update User migration
+1/23/2016 - branch:add_auth - Add custom user authentication (create, login, logout)
