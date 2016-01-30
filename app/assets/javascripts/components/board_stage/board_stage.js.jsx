@@ -23,7 +23,6 @@ var BoardStage = BoardStage || {};
 
     componentDidUpdate: function() {
       this._adjustDimensions();
-      this._scrollToCategoriesBottom();
     },
 
     render: function() {
@@ -128,6 +127,7 @@ var BoardStage = BoardStage || {};
               result = Immutable.fromJS(result);
               if (result.get('categories')) {
                 that.setState({ categories: result.get('categories'), });
+                that._scrollToCategoriesBottom();
               }
               poll();
             }
