@@ -13,4 +13,4 @@
 /tmp
 
 # Custom
-.eslintrc
+config/secrets.yml
