@@ -9,15 +9,22 @@ Built with Ruby on Rails and ReactJS. Hosted on Heroku.
 
 ## Setup
 
-```
-> git clone https://github.com/girb0t/shout_out_board.git
-> cd shout_out_board
-> rake db:create
-> rake db:migrate
-> rails s
-```
+1. Clone, set up DB, start server.
 
-visit ```localhost:3000/```
+  ```
+  > git clone https://github.com/girb0t/shout_out_board.git
+  > cd shout_out_board
+  > rake db:create
+  > rake db:migrate
+  > rails s
+  ```
+  visit ```localhost:3000```
+
+2. Run tests:
+
+  ```
+  > rspec
+  ```
 
 ## How To
 
