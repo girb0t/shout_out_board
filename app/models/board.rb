@@ -1,4 +1,6 @@
+#TODO add NOT NULL constraint to user_id
 class Board < ActiveRecord::Base
+  belongs_to :user
   has_many :categories
   has_many :posts, through: :categories
   validates :key, presence: true, uniqueness: true
