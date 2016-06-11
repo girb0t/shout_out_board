@@ -14,9 +14,10 @@ class SessionsController < ApplicationController
       redirect_to '/login'
     end
   end
+
   def destroy
     reset_session
     flash[:success] = "Logged out successfully! See you soon."
-    redirect_to '/signup'
+    redirect_to '/login'
   end
 end
