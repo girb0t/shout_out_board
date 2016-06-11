@@ -6,7 +6,8 @@ class PostsController < ApplicationController
     new_post = Post.new(category_id: params[:category_id],
                         body: params[:post_body],
                         background_color_hex: params[:bg_color_hex],
-                        font_color_hex: params[:font_color_hex] )
+                        font_color_hex: params[:font_color_hex],
+                        user_id: session[:user_id] )
     new_post.save
     render json: { status: 'ok', categoryId: params[:category_id] }
   end
