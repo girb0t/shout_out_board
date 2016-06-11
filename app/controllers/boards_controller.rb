@@ -15,7 +15,8 @@ class BoardsController < ApplicationController
   def create
     form_data = JSON.parse(params["form-data-json"])
     board = Board.new( key: form_data['key']['value'],
-                       title: form_data['title']['title'])
+                       title: form_data['title']['title'],
+                       user_id: session[:user_id])
 
     (1..form_data["categoryCount"]).each do |i|
       category_hash = form_data["category" + i.to_s]
