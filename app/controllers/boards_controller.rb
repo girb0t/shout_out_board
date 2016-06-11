@@ -1,9 +1,14 @@
 class BoardsController < ApplicationController
   def index
-    @boards = current_user.boards.order(:created_at)
+    if logged_in?
+      @boards = current_user.boards.order(:created_at)
+    else
+      redirect_to login_path, :flash => { :danger => "You must be logged in to see your boards!" }
+    end
   end
 
   def new
+    redirect_to login_path, :flash => { :danger => "You must be logged in to create a board!" }
   end
 
   def validate_key
