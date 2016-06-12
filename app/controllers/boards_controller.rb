@@ -8,7 +8,9 @@ class BoardsController < ApplicationController
   end
 
   def new
-    redirect_to login_path, :flash => { :danger => "You must be logged in to create a board!" }
+    unless logged_in?
+      redirect_to login_path, :flash => { :danger => "You must be logged in to create a board!" }
+    end
   end
 
   def validate_key
