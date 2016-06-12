@@ -48,8 +48,6 @@ TODO:
 2. Enter board key set when board was created.
 3. Write and submit post. Since some of the girls were learning CSS, I decided to add a fun feature where they could change the color and background color of their posts using color hexes.
 
-TODO:
-- Include an explanation for what to do on this page.
 
 ### Show a Board
 Visit ```/boards/:key```. This board gets updated in real time for students to see. This is done using long-polling, but I hope to implement WebSockets some time in the future.
