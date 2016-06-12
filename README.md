@@ -46,3 +46,8 @@ Create a board for students to post to. A board consists of:
 
 ### Show a Board
 Visit ```/boards/:key```. This board gets updated in real time for students to see. This is done using long-polling, but I hope to implement WebSockets some time in the future.
+
+## Misc.
+
+### DB Schema
+![alt tag](app/assets/images/schema_diagram.png)
