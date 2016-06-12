@@ -38,7 +38,7 @@ var NewPostForm = NewPostForm || {};
                      onChange={this._onKeyChange}
                      id="key"
                      className="form-control"
-                     placeholder="Enter Key" />
+                     placeholder="Enter Board Key" />
               <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
             </div>
           </div>
