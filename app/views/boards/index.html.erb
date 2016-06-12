@@ -15,7 +15,9 @@
       <tr>
         <td><%= link_to board.key, "/boards/#{board.key}" %><br/></td>
         <td><%= board.title %></td>
-        <td><%= board.active %></td>
+        <td><%= link_to "#{board.active}",
+                        boards_update_path(board.key, board: {active: !board.active}),
+                        method: 'put' %></td>
       </tr>
     <% end %>
 
