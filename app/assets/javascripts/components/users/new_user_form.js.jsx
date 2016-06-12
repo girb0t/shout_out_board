@@ -11,7 +11,6 @@ var NewUserForm = NewUserForm || {};
       return {
         firstName: '',
         lastName: '',
-        email: '',
         username: '',
         password: '',
         passwordConfirmation: '',
@@ -34,13 +33,6 @@ var NewUserForm = NewUserForm || {};
               <label className="col-sm-1 col-md-1" htmlFor="last-name-input">Last Name</label>
               <div className="col-sm-3">
                 <input value={this.state.lastName} type="text" onChange={this._onLastNameChange} className="form-control" id="last-name-input" />
-              </div>
-            </div>
-            {/* email */}
-            <div className="form-group">
-              <label className="col-sm-1 col-md-1" htmlFor="email-input">Email</label>
-              <div className="col-sm-3">
-                <input value={this.state.email} type="text" onChange={this._onEmailChange} className="form-control" id="email-name-input" />
               </div>
             </div>
             {/* username */}
@@ -91,12 +83,6 @@ var NewUserForm = NewUserForm || {};
     _onLastNameChange: function(event) {
       this.setState({
         lastName: event.target.value,
-      });
-    },
-
-    _onEmailChange: function(event) {
-      this.setState({
-        email: event.target.value,
       });
     },
 

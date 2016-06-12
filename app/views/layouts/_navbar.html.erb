@@ -3,6 +3,12 @@
     <div class="navbar-header">
       <%= link_to "Shout Out", root_path, class: 'navbar-brand' %>
     </div>
+    <ul class="nav navbar-nav">
+      <% if logged_in? %>
+        <li><a href='/boards'>My Boards</a></li>
+        <li><a href='/boards/new'>New Board</a></li>
+      <% end %>
+    </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if logged_in? %>
         <li><p class="navbar-text">Hello <a href='#'><%= current_user.first_name %></a></p></li>

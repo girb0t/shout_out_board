@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124003533) do
+ActiveRecord::Schema.define(version: 20160611195405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(version: 20160124003533) do
     t.boolean  "active",     default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "boards", ["user_id"], name: "index_boards_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "board_id"
@@ -40,10 +43,12 @@ ActiveRecord::Schema.define(version: 20160124003533) do
     t.datetime "updated_at"
     t.string   "background_color_hex", limit: 7
     t.string   "font_color_hex",       limit: 7
+    t.integer  "user_id"
   end
 
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",           null: false
     t.string   "username",        null: false
     t.string   "password_digest", null: false
     t.datetime "created_at"
@@ -52,4 +57,6 @@ ActiveRecord::Schema.define(version: 20160124003533) do
     t.string   "last_name",       null: false
   end
 
+  add_foreign_key "boards", "users"
+  add_foreign_key "posts", "users"
 end
