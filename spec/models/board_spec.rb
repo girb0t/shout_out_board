@@ -13,6 +13,7 @@ describe Board do
 
   describe "validations" do
     it { expect(board).to validate_presence_of(:key) }
+    it { expect(board).to validate_uniqueness_of(:key) }
     it { expect(board).to validate_presence_of(:title) }
   end
 
