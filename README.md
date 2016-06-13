@@ -1,6 +1,6 @@
 # Shout Out Board
 ## Overview
-This a hobby project used by my Girls Who Code students to post "shout outs" from a classroom PC to a class "board" projected on a big screen. The class "board" gets populated in real time.
+This a hobby project used by my Girls Who Code middle-school students to post "shout outs" from a classroom PC to a class "board" projected on a big screen. The class "board" gets populated in real time.
 
 - See [here](http://imgur.com/a/sF33D) to see some Balsamiq mockups.
 - See [here](http://shoutout.peicodes.com/boards/semicolon) for some actual shoutouts from my class! First load may be slow due to the web dyno awakening from slumber.
