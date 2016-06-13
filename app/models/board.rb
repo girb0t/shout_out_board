@@ -6,6 +6,7 @@ class Board < ActiveRecord::Base
   validates :key, presence: true, uniqueness: true
   validates :title, presence: true
   validates :active, inclusion: { in: [true, false] }
+  validates :archived, inclusion: { in: [true, false] }
 
   scope :active, -> { where(active: true) }
 
