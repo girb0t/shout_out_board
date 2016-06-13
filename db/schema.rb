@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611195405) do
+ActiveRecord::Schema.define(version: 20160612233338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
-    t.string   "key",                       null: false
-    t.string   "title",                     null: false
-    t.boolean  "active",     default: true, null: false
+    t.string   "key",                        null: false
+    t.string   "title",                      null: false
+    t.boolean  "active",     default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "archived",   default: false
   end
 
   add_index "boards", ["user_id"], name: "index_boards_on_user_id", using: :btree
