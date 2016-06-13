@@ -43,11 +43,16 @@ class BoardsController < ApplicationController
     redirect_to boards_path
   end
 
+  # Note: By design, everyone should be able to see any board.
   def show
     respond_to do |format|
-      format.html {
-        @board_key = params["key"]
-      }
+      format.html do
+        if Board.find_by(key: params["key"])
+          @board_key = params["key"]
+        else
+          redirect_to boards_path, flash: { danger: "No board with key '#{params["key"]}' exists."}
+        end
+      end
 
       format.json do
         if new_posts_available? || params["post_count"].nil?
