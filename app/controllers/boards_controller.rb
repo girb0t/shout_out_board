@@ -50,7 +50,7 @@ class BoardsController < ApplicationController
         if Board.find_by(key: params["key"])
           @board_key = params["key"]
         else
-          redirect_to boards_path, flash: { danger: "No board with key '#{params["key"]}' exists."}
+          redirect_to posts_new_path, flash: { danger: "No board with key '#{params["key"]}' exists."}
         end
       end
 
