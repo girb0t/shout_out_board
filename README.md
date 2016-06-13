@@ -33,14 +33,13 @@ path: ```/boards/new```
 
 Create a board for students to post to. You must be logged in to create a board. A board consists of:
 - Key: Must be unique and at least 4 characters.
-- Category Count: Each board can have 1-3 categories.
+- Topic Count: Each board can have 1-3 topics (called 'categories' in the back-end).
 - Categories: Each category consists of:
   * Title: The column header on the boards#show page
   * Tab Name: The name of the tab on the posts#new page
   * Prompt: The question/prompt asked to the student on the posts#new page
 
 TODO:
-- Make clear what each form field means.
 - Make note that key is case sensitive.
 
 ### Post to a Board
