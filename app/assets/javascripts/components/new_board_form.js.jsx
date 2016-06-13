@@ -8,6 +8,10 @@ var NewBoardForm = NewBoardForm || {};
       submitForm:  '/boards',
     },
 
+    componentDidMount: function() {
+      $('[data-toggle="tooltip"]').tooltip({placement: 'right', trigger: 'hover'});
+    },
+
     getInitialState: function() {
       return {
         key: Immutable.Map({isValid: false, value: "", validationMessage:""}),
@@ -24,35 +28,47 @@ var NewBoardForm = NewBoardForm || {};
       var validationFailedMessageClass = "text-danger";
 
       return(
-        <div className="shout-out">
+        <div>
+          <h1>New Board</h1>
           <form role="form" className="form-horizontal" id="new-board-form">
             <div className="form-group">
-              <label className="col-sm-1 col-md-1" htmlFor="key">Key</label>
+              <label className="col-sm-1 col-md-1" htmlFor="key">Board Key</label>
               <div className="col-sm-3">
-                <input type="text" onChange={this.onKeyChange} className="form-control" id="key" />
+                <input type="text"
+                  onChange={this.onKeyChange}
+                  className="form-control"
+                  id="key"
+                  data-toggle="tooltip"
+                  title="A key entered by students to post to a board." />
                 <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
               </div>
             </div>
             <div className="form-group">
-              <label className="col-sm-1" htmlFor="title">Title</label>
+              <label className="col-sm-1" htmlFor="title">Board Title</label>
               <div className="col-sm-5">
                 <input ref="my-title" type="text" value={this.state.title.get('title')} onChange={this.onTitleChange} className="form-control" id="title" />
                 <div className={validationFailedMessageClass}>{this.state.title.get('validationMessage')}</div>
               </div>
             </div>
-            <hr/>
-            <div className="form-group">
-              <label className="col-sm-3 col-md-2" htmlFor="category-count">Category Count</label>
-              <div className="col-sm-3">
-                <select value={this.state.categoryCount} id="category-count" onChange={this.onCategoryCountChange}>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
+
+            <div id="categories-section">
+              <h3>Categories</h3>
+              <hr/>
+              <div className="form-group">
+                <label className="col-sm-3 col-md-2" htmlFor="category-count">Category Count</label>
+                <div className="col-sm-3">
+                  <select value={this.state.categoryCount} id="category-count" onChange={this.onCategoryCountChange}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
               </div>
+              <hr/>
+              {this.buildCategorySection()}
             </div>
-            <hr/>
-            {this.buildCategorySection()}
+
+
             <button className="btn btn-primary" type="button" onClick={this.onSubmit}>Submit</button>
           </form>
         </div>
