@@ -4,7 +4,16 @@
   }
 
   .form-group {
-    margin-bottom: 25px;
+    display: flex;
+    margin: 0px 10px 25px 10px;
+    align-items: center;
+    label {
+      margin-right: 15px;
+    }
+    .input-container {
+      flex-grow: 2;
+      max-width: 400px;
+    }
   }
 
   .tooltip-inner {

@@ -32,8 +32,8 @@ var NewBoardForm = NewBoardForm || {};
           <h1>New Board</h1>
           <form role="form" className="form-horizontal" id="new-board-form">
             <div className="form-group">
-              <label className="col-sm-1 col-md-1" htmlFor="key">Board Key</label>
-              <div className="col-sm-3">
+              <label htmlFor="key">Board Key</label>
+              <div className="input-container">
                 <input type="text"
                   onChange={this.onKeyChange}
                   className="form-control"
@@ -44,8 +44,8 @@ var NewBoardForm = NewBoardForm || {};
               </div>
             </div>
             <div className="form-group">
-              <label className="col-sm-1" htmlFor="title">Board Title</label>
-              <div className="col-sm-5">
+              <label htmlFor="title">Board Title</label>
+              <div className="input-container">
                 <input ref="my-title" type="text" value={this.state.title.get('title')} onChange={this.onTitleChange} className="form-control" id="title" />
                 <div className={validationFailedMessageClass}>{this.state.title.get('validationMessage')}</div>
               </div>
@@ -55,8 +55,8 @@ var NewBoardForm = NewBoardForm || {};
               <h3>Categories</h3>
               <hr/>
               <div className="form-group">
-                <label className="col-sm-3 col-md-2" htmlFor="category-count">Category Count</label>
-                <div className="col-sm-3">
+                <label htmlFor="category-count">Category Count</label>
+                <div className="input-container">
                   <select value={this.state.categoryCount} id="category-count" onChange={this.onCategoryCountChange}>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -213,20 +213,20 @@ var NewBoardForm = NewBoardForm || {};
             <br/>
 
             <div className="form-group">
-              <label className="col-sm-3" htmlFor={titleId}>Cat. {i + 1} Title</label>
-              <div className="col-sm-3">
+              <label htmlFor={titleId}>Cat. {i + 1} Title</label>
+              <div className="input-container">
                 <input value={titleText} type="text" onChange={this.onCategoryTitleChange.bind(this, categoryId)} className="form-control" id={titleId} />
               </div>
             </div>
             <div className="form-group">
-              <label className="col-sm-3" htmlFor={tabNameId}>Cat. {i + 1} Tab Name</label>
-              <div className="col-sm-2">
+              <label htmlFor={tabNameId}>Cat. {i + 1} Tab Name</label>
+              <div className="input-container">
                 <input value={tabNameText} type="text" onChange={this.onCategoryTabNameChange.bind(this, categoryId)} className="form-control" id={tabNameId} />
               </div>
             </div>
             <div className="form-group">
-              <label className="col-md-3" htmlFor={bodyId}>Cat. {i + 1} Prompt</label>
-              <div className="col-md-6">
+              <label htmlFor={bodyId}>Cat. {i + 1} Prompt</label>
+              <div className="input-container">
                 <textarea value={bodyText} onChange={this.onCategoryBodyChange.bind(this, categoryId)} className="form-control" id={bodyId} name={bodyId}  />
               </div>
             </div>
