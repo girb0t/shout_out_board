@@ -17,9 +17,9 @@ var NewBoardForm = NewBoardForm || {};
         key: Immutable.Map({isValid: false, value: "", validationMessage:""}),
         title: Immutable.Map({title: "", validationMessage: ""}),
         categoryCount: 2,
-        category1: Immutable.Map({title: "", prompt: "", tabName: "", validationMessage:""}),
-        category2: Immutable.Map({title: "", prompt: "", tabName: "", validationMessage:""}),
-        category3: Immutable.Map({title: "", prompt: "", tabName: "", validationMessage:""}),
+        category1: Immutable.Map({title: "", prompt: "", tabName: "Topic 1", validationMessage:""}),
+        category2: Immutable.Map({title: "", prompt: "", tabName: "Topic 2", validationMessage:""}),
+        category3: Immutable.Map({title: "", prompt: "", tabName: "Topic 3", validationMessage:""}),
       };
     },
 
@@ -39,7 +39,7 @@ var NewBoardForm = NewBoardForm || {};
                   className="form-control"
                   id="key"
                   data-toggle="tooltip"
-                  title="A key entered by students to post to a board." />
+                  title={ this.tooltipContent('boardKey')} />
                 <div className={keyValidationMessageClass}>{this.state.key.get('validationMessage')}</div>
               </div>
             </div>
@@ -52,10 +52,15 @@ var NewBoardForm = NewBoardForm || {};
             </div>
 
             <div id="categories-section">
-              <h3>Categories</h3>
+              <h3>
+                Board Topics
+                <i className="fa fa-question-circle"
+                  data-toggle="tooltip"
+                  title={this.tooltipContent('categoriesHeader')}></i>
+              </h3>
               <hr/>
               <div className="form-group">
-                <label htmlFor="category-count">Category Count</label>
+                <label htmlFor="category-count">Number of Topics</label>
                 <div className="input-container">
                   <select value={this.state.categoryCount} id="category-count" onChange={this.onCategoryCountChange}>
                     <option value="1">1</option>
@@ -196,7 +201,8 @@ var NewBoardForm = NewBoardForm || {};
           bodyId,
           bodyText,
           categoryCount = this.state.categoryCount,
-          categoryNodes = [];
+          categoryNodes = [],
+          dataToggle;
 
       for (var i = 0; i < categoryCount; ++i) {
         categoryId = "category" + (i+1);
@@ -206,28 +212,47 @@ var NewBoardForm = NewBoardForm || {};
         tabNameText = this.state[categoryId].get("tabName");
         bodyId = categoryId + "-prompt";
         bodyText = this.state[categoryId].get("prompt");
+        dataToggle = (i>0 ? '' : 'tooltip'); //only show tooltips for first category
 
         categoryNodes.push(
           <div key={categoryId}>
+            <h4>Topic {i + 1}</h4>
             <div className="text-danger">{this.state[categoryId].get('validationMessage')}</div>
             <br/>
 
             <div className="form-group">
-              <label htmlFor={titleId}>Cat. {i + 1} Title</label>
+              <label htmlFor={titleId}>Title</label>
               <div className="input-container">
-                <input value={titleText} type="text" onChange={this.onCategoryTitleChange.bind(this, categoryId)} className="form-control" id={titleId} />
+                <input value={titleText}
+                  type="text"
+                  onChange={this.onCategoryTitleChange.bind(this, categoryId)}
+                  className="form-control" id={titleId}
+                  data-toggle={dataToggle}
+                  title={this.tooltipContent('categoryTitle')} />
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor={tabNameId}>Cat. {i + 1} Tab Name</label>
+              <label htmlFor={tabNameId}>Tab Name</label>
               <div className="input-container">
-                <input value={tabNameText} type="text" onChange={this.onCategoryTabNameChange.bind(this, categoryId)} className="form-control" id={tabNameId} />
+                <input value={tabNameText}
+                  type="text"
+                  onChange={this.onCategoryTabNameChange.bind(this, categoryId)}
+                  className="form-control"
+                  id={tabNameId}
+                  data-toggle={dataToggle}
+                  title={this.tooltipContent('categoryTab')} />
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor={bodyId}>Cat. {i + 1} Prompt</label>
+              <label htmlFor={bodyId}>Prompt</label>
               <div className="input-container">
-                <textarea value={bodyText} onChange={this.onCategoryBodyChange.bind(this, categoryId)} className="form-control" id={bodyId} name={bodyId}  />
+                <textarea value={bodyText}
+                  onChange={this.onCategoryBodyChange.bind(this, categoryId)}
+                  className="form-control"
+                  id={bodyId}
+                  name={bodyId}
+                  data-toggle={dataToggle}
+                  title={this.tooltipContent('categoryPrompt')} />
               </div>
             </div>
             <hr/>
@@ -235,7 +260,18 @@ var NewBoardForm = NewBoardForm || {};
         );
       }
       return categoryNodes;
-    }
+    },
+
+    tooltipContent: function(key) {
+      var config = {
+        boardKey: 'A key entered by students to post to a board.',
+        categoriesHeader: 'Each board can have up to 3 topics for students to post about. Each topic is a column on the board.',
+        categoryTitle: 'The title displayed in the column header of the board.',
+        categoryTab: 'A one or two word description of the category.',
+        categoryPrompt: 'The question students will be posting about.',
+      };
+      return config[key];
+    },
   });
 })();
 
