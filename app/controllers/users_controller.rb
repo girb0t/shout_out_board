@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   def new
+    redirect_to root_path if logged_in?
+    # otherwise render 'new.html.erb'
   end
 
   def create
