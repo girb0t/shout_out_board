@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :board do
+    user
     key Faker::Lorem.word
     title Faker::Lorem.sentence
 
