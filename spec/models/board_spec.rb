@@ -3,8 +3,6 @@ require 'rails_helper'
 describe Board do
   it "has a valid factory" do
     expect(build(:board)).to be_valid
-    expect(build(:active_board)).to be_valid
-    expect(build(:inactive_board)).to be_valid
   end
 
   let(:board) { build(:board) }
