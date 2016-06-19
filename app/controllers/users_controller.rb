@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    form_data = JSON.parse(params['form-data-json'])
     user_params = JSON.parse(params['form-data-json'])
     user = User.new( first_name: user_params['firstName'],
                      last_name: user_params['lastName'],
@@ -19,7 +18,7 @@ class UsersController < ApplicationController
       redirect_to boards_new_path
     else
       flash[:danger] = "Sorry. Something went wrong :'("
-      redirect_to '/signup'
+      redirect_to signup_path
     end
   end
 end
