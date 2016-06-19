@@ -4,6 +4,7 @@ class Board < ActiveRecord::Base
   has_many :categories
   has_many :posts, through: :categories
   validates :key, presence: true, uniqueness: true
+  validates :user_id, presence: true
   validates :title, presence: true
   validates :active, inclusion: { in: [true, false] }
   validates :archived, inclusion: { in: [true, false] }
