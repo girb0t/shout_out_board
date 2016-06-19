@@ -41,7 +41,7 @@ describe SessionsController do
       end
 
       it "saves message to flash success" do
-        expect(flash[:success]).to_not be_nil
+        expect(flash[:success]).to be
       end
     end
 
@@ -56,7 +56,7 @@ describe SessionsController do
       end
 
       it "saves message to flash danger" do
-        expect(flash[:danger]).to_not be_nil
+        expect(flash[:danger]).to be
       end
     end
 
@@ -71,7 +71,7 @@ describe SessionsController do
       end
 
       it "saves message to flash danger" do
-        expect(flash[:danger]).to_not be_nil
+        expect(flash[:danger]).to be
       end
     end
   end

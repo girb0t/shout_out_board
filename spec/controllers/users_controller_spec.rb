@@ -53,7 +53,7 @@ describe UsersController do
 
       it "saves message to flash success" do
         post :create, 'form-data-json' => form_params
-        expect(flash[:success]).to_not be_nil
+        expect(flash[:success]).to be
       end
     end
 
@@ -80,7 +80,7 @@ describe UsersController do
 
       it "saves message to flash danger" do
         post :create, 'form-data-json' => bad_form_params
-        expect(flash[:danger]).to_not be_nil
+        expect(flash[:danger]).to be
       end
     end
 
