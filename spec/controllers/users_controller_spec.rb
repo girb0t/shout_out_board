@@ -9,7 +9,7 @@ describe UsersController do
         session[:user_id] = user.id
       end
 
-      it "redirects to root_path" do
+      it "redirects to boards_path" do
         get :new
         expect(response).to redirect_to boards_path
       end
