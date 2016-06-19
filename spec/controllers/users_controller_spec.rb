@@ -67,6 +67,7 @@ describe UsersController do
           password_confirmation: 'password'
         }.to_json
       end
+
       it "does not create a new user in the database" do
         expect {
           post :create, 'form-data-json' => @bad_form_params
