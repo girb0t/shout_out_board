@@ -11,7 +11,7 @@ describe UsersController do
 
       it "redirects to root_path" do
         get :new
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to boards_path
       end
     end
 
