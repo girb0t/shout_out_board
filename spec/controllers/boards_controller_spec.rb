@@ -1,0 +1,97 @@
+require 'rails_helper'
+
+describe BoardsController do
+  let(:user) { create(:user_with_boards) }
+  let(:board) { user.boards.last }
+
+  describe "GET #index" do
+    context "user is logged in" do
+      before(:each) do
+        session[:user_id] = user.id
+      end
+
+      it "assigns current user's boards to @boards" do
+        get :index
+        expect(assigns(:boards)).to match_array user.boards
+      end
+
+      it "renders the index template" do
+        get :index
+        expect(response).to render_template :index
+      end
+    end
+
+    context "user is not logged in" do
+      it "redirects to login_path" do
+        get :index
+        expect(response).to redirect_to login_path
+      end
+
+      it "saves message to flash danger"
+    end
+  end
+
+  describe "GET #new" do
+    context "user is logged in" do
+      it "renders the new template"
+    end
+
+    context "user is not logged in" do
+      it "redirects to login path"
+      it "saves message to flash danger"
+    end
+  end
+
+  describe "GET #show" do
+    context "respond to html" do
+      context "board exists" do
+        it   "assigns @board_key"
+        it "renders the show template"
+      end
+
+      context "board does not exist" do
+        it "redirects to posts_new_path"
+        it "saves message to flash danger"
+      end
+    end
+
+    context "respond to json" do
+      context "is initial page load" do
+        it "renders correct Board in JSON"
+      end
+      context "new posts are available" do
+        it "renders correct Board in JSON"
+      end
+      context "is not initial page load and no new posts" do
+        it "returns no posts message in JSON"
+      end
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new board in the database"
+      it "redirects to the new board's show path"
+    end
+
+    context "with invalid params" do
+      it "redirects to boards_path"
+      it "saves message to flash danger"
+    end
+  end
+
+  describe "PUT #update" do
+    context "with valid params" do
+      it "updates the board board"
+      it "redirects to boards path"
+    end
+    context "with invalid params" do
+    end
+  end
+
+  describe "GET #validate_key" do
+    it "returns invalid key message if key already in DB"
+    it "returns valid key message if key not in DB"
+  end
+
+end
