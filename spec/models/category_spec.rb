@@ -10,5 +10,6 @@ describe Category do
   describe "validations" do
     it { expect(category).to validate_presence_of(:title) }
     it { expect(category).to validate_presence_of(:prompt) }
+    it { expect(category).to validate_presence_of(:tab_name) }
   end
 end
