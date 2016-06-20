@@ -84,17 +84,34 @@ describe BoardsController do
       end
     end
 
-    context "respond to json" do
+    context "respond to JSON" do
       before(:each) { request.accept = "application/json" }
 
       context "is initial page load" do
-        it "renders correct Board in JSON"
+        it "renders correct Board in JSON" do
+          get :show, key: board.key, initial_load: true
+          res = JSON.parse(response.body)
+          expect(res['key']).to eq board.key
+        end
       end
+
       context "new posts are available" do
-        it "renders correct Board in JSON"
+        it "renders correct Board in JSON" do
+          category = board.categories.create(attributes_for(:category))
+          category.posts.create(attributes_for(:post))
+
+          get :show, key: board.key, post_count: 0
+          res = JSON.parse(response.body)
+          expect(res['key']).to eq board.key
+        end
       end
+
       context "is not initial page load and no new posts" do
-        it "returns no posts message in JSON"
+        it "returns no posts message in JSON" do
+          get :show, key: board.key, post_count: 0
+          res = JSON.parse(response.body)
+          expect(res['message']).to eq "No new posts!"
+        end
       end
     end
   end
