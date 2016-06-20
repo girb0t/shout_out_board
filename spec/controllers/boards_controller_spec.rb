@@ -27,35 +27,66 @@ describe BoardsController do
         expect(response).to redirect_to login_path
       end
 
-      it "saves message to flash danger"
+      it "saves message to flash danger" do
+        get :index
+        expect(flash[:danger]).to be
+      end
     end
   end
 
   describe "GET #new" do
     context "user is logged in" do
-      it "renders the new template"
+      before(:each) { session[:user_id] = user.id }
+
+      it "renders the new template" do
+        get :new
+        expect(response).to render_template :new
+      end
     end
 
     context "user is not logged in" do
-      it "redirects to login path"
-      it "saves message to flash danger"
+      it "redirects to login path" do
+        get :new
+        expect(response).to redirect_to login_path
+      end
+
+      it "saves message to flash danger" do
+        get :new
+        expect(flash[:danger]).to be
+      end
     end
   end
 
   describe "GET #show" do
     context "respond to html" do
       context "board exists" do
-        it   "assigns @board_key"
-        it "renders the show template"
+        it "assigns @board_key" do
+          get :show, key: board.key
+          expect(assigns(:board_key)).to eq board.key
+        end
+
+        it "renders the show template" do
+          get :show, key: board.key
+          expect(response).to render_template :show
+        end
       end
 
       context "board does not exist" do
-        it "redirects to posts_new_path"
-        it "saves message to flash danger"
+        it "redirects to posts_new_path" do
+          get :show, key: 'nonexistent_key'
+          expect(response).to redirect_to posts_new_path
+        end
+
+        it "saves message to flash danger" do
+          get :show, key: 'nonexistent_key'
+          expect(flash[:danger]).to be
+        end
       end
     end
 
     context "respond to json" do
+      before(:each) { request.accept = "application/json" }
+
       context "is initial page load" do
         it "renders correct Board in JSON"
       end
