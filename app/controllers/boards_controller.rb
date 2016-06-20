@@ -34,8 +34,12 @@ class BoardsController < ApplicationController
       board.categories.push(category)
     end
 
-    board.save
-    redirect_to "/boards/#{board.key}"
+    begin
+      board.save!
+      redirect_to "/boards/#{board.key}"
+    rescue
+      redirect_to boards_path, :flash => { :danger => "Something went wrong and your Board wasn't saved." }
+    end
   end
 
   def update
@@ -43,7 +47,7 @@ class BoardsController < ApplicationController
     redirect_to boards_path
   end
 
-  # Note: By design, everyone should be able to see any board.
+  # Note: By design, everyone should be able to see any board whether logged in or not.
   def show
     respond_to do |format|
       format.html do
@@ -55,7 +59,7 @@ class BoardsController < ApplicationController
       end
 
       format.json do
-        if new_posts_available? || params["post_count"].nil?
+        if params[:initial_load] || new_posts_available?
           render json: Board.find_by(key: params["key"])
                             .to_board_stage_json
         else
