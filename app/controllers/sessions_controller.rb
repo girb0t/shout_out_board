@@ -6,9 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     #protect against session fixation: http://guides.rubyonrails.org/security.html#session-fixation
-    temp_session = session.dup
     reset_session
-    session.replace(temp_session)
 
     user = User.find_by(username: params[:username])
 
